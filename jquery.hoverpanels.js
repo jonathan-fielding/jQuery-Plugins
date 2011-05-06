@@ -5,7 +5,8 @@
     var settings = {
 	  'default_content'  	: '.default',
 	  'hover_content'    	: '.hover',
-	  'fade_level'    		: '0.5'
+	  'fade_level'    		: '0.5',
+	  'touch_injectHTML'	: '<p class="more_info">Tap for more info</p>'
     };
 
     return this.each(function() {        
@@ -18,7 +19,11 @@
 		$(this).find(settings.hover_content).hide();
 		
 		if(isTouchDevice()){
+			$(this).find(settings.default_content).append(settings.touch_injectHTML);
+		
 			$(this).click(function(){
+				$(this).siblings().find(settings.default_content).show();
+				$(this).siblings().find(settings.hover_content).hide();
 				$(this).stop(true);
 				$(this).siblings().stop(true)
 				$(this).siblings().fadeTo('',settings.fade_level);
@@ -50,7 +55,7 @@
 		        document.createEvent("TouchEvent");
 		        return true;
 		    } catch (e) {
-		        return false;
+		        return true;
 		    }
 		}
     });
