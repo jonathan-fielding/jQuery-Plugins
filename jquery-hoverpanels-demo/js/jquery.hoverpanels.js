@@ -55,7 +55,7 @@
 		        document.createEvent("TouchEvent");
 		        return true;
 		    } catch (e) {
-		        return true;
+		        return false;
 		    }
 		}
     });
